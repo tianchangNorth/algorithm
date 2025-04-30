@@ -22,20 +22,24 @@ const arrayToList = (arr: number[]): ListNode | null => {
   return head;
 };
 
-const list5 = arrayToList([1, 1, 3, 3, 4, 4, 5]);
+const list5 = arrayToList([1, 1, 3, 3, 4, 4, 7, 5]);
 
 const delListNode = (l: ListNode) => {
+  if (!l || !l.next) return l;
   let head = new ListNode();
-  let cur = head.next = l;
-  while (cur && cur.next) {
-    cur.val = cur.next.val;
-    if (cur.val === cur.next.val) {
-      cur.next = cur.next.next;
+  head.next = l;
+  let cur = head;
+  while (cur.next && cur.next.next) {
+    if (cur.next.val === cur.next.next.val) {
+      let val = cur.next.val
+      while (cur.next && cur.next.val === val) {
+        cur.next = cur.next.next;
+      }
     } else {
       cur = cur.next
     }
   }
-  return l
+  return head.next
 }
 
 const printList = (l: ListNode | null) => {

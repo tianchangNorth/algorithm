@@ -1,5 +1,7 @@
 // 给你一个字符串 s，找到 s 中最长的 回文 子串。
 
+import { log } from "console";
+
 // 示例 1：
 
 // 输入：s = "babad"
@@ -32,7 +34,25 @@
 // }
 
 function longestPalindrome(str: string): string {
-  return ''
+  const len = str.length;
+  let res = '';
+  for (let i = 0; i < len; i++) {
+    const res1 = palindrome(str, i, i + 1);
+    const res2 = palindrome(str, i, i);
+    res = res.length > res1.length ? res : res1;
+    res = res.length > res2.length ? res : res2;
+  }
+
+
+  return res
+}
+
+const palindrome = (str: string, l: number, r: number): string => {
+  while (l >= 0 && r < str.length && str[l] === str[r]) {
+    l--;
+    r++;
+  }
+  return str.substring(l + 1, r);
 }
 
 console.log(longestPalindrome('bb'));
