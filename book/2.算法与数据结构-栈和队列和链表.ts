@@ -12,7 +12,7 @@
 // arr.splice(1,1)
 
 // 初始状态，栈空
-const stack = []  
+const stack = []
 // 入栈过程
 stack.push('东北大板')
 stack.push('可爱多')
@@ -21,10 +21,10 @@ stack.push('冰工厂')
 stack.push('光明奶砖')
 
 // 出栈过程，栈不为空时才执行
-while(stack.length) {
+while (stack.length) {
     // 单纯访问栈顶元素（不出栈）
-    const top = stack[stack.length-1]
-    console.log('现在取出的冰淇淋是', top)  
+    const top = stack[stack.length - 1]
+    console.log('现在取出的冰淇淋是', top)
     // 将栈顶元素出栈
     stack.pop()
 }
@@ -33,15 +33,15 @@ while(stack.length) {
 stack // []
 
 
-const queue = []  
+const queue = []
 queue.push('小册一姐')
 queue.push('小册二姐')
-queue.push('小册三姐')  
-  
-while(queue.length) {
+queue.push('小册三姐')
+
+while (queue.length) {
     // 单纯访问队头元素（不出队）
     const top = queue[0]
-    console.log(top,'取餐')
+    console.log(top, '取餐')
     // 将队头元素出队
     queue.shift()
 }
@@ -67,8 +67,7 @@ queue // []
 // }   
 
 class ListNode {
-    constructor(public val:any , public next:any = null) {
-        this.val = val
+    constructor(public val: any, public next: any = null) {
     }
 }
 
