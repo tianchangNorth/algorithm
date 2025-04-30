@@ -6,6 +6,17 @@ class linkedList {
   constructor(public val: any = null, public next: any = null) { }
 }
 
+const arrayToList = (arr: number[]): linkedList | null => {
+  if (arr.length === 0) return null;
+  const head = new linkedList(arr[0]);
+  let cur = head;
+  for (let i = 1; i < arr.length; i++) {
+    cur.next = new linkedList(arr[i]);
+    cur = cur.next;
+  }
+  return head;
+};
+
 const list1 = new linkedList(1)
 
 list1.next = new linkedList(2)
