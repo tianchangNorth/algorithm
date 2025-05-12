@@ -21,14 +21,17 @@ const arrayToList = (arr: any[]): ListNode | null => {
 
 const list9 = arrayToList([1, 1, 3]);
 
-list9!.next!.next = list9; // 创建环
+list9!.next!.next!.next = list9!.next; // 创建环
 
 const hasCycle = (l: ListNode) => {
+  let num = 1
   while (l) {
     if (l.flag) {
-      return true
+      console.log('note', l.flag);
+      return l.flag
     } else {
-      l.flag = true
+      l.flag = num++
+      console.log('flag', l.flag, 'val', l.val);
       l = l.next!
     }
   }
