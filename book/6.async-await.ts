@@ -1,3 +1,4 @@
+import { rejects } from "node:assert";
 import { log } from "node:console";
 import { resolve } from "node:path";
 
@@ -58,36 +59,113 @@ import { resolve } from "node:path";
 
 // test();
 
-const a = new Promise(resolve => setTimeout(() => { console.log('kaishi'); resolve('xxx') }, 1000))
+// const a = new Promise(resolve => setTimeout(() => { console.log('kaishi'); resolve('xxx') }, 1000))
 
 // a.then((res) => {
 //   console.log(res);
 // })
 
-async function b() {
-  const value = await a
-  console.log('jeishub');
-}
-
-function c() {
-  a.then(() => {
-    console.log('jieshuc');
-  })
-}
-
-b()
-
-c()
-
-// type ResolveFunc = (value: any) => void;
-// type RejectFunc = (reason: any) => void;
-
-// class Promise {
-//   private state: 'pending' | 'fulfilled' | 'rejected' = 'pending';
-//   private value: any = undefined;
-//   private reason: any = undefined;
-//   private onFulfilledCallbacks: ResolveFunc[] = [];
-//   private onRejectedCallbacks: RejectFunc[] = [];
-
-//   constructor(executor: (resolve: ResolveFunc, reject: RejectFunc) => void) { }
+// async function b() {
+//   const value = await a
+//   console.log('jeishub');
 // }
+
+// function c() {
+//   a.then(() => {
+//     console.log('jieshuc');
+//   })
+// }
+
+// b()
+
+// c()
+
+// const e = async () => {
+//   await Promise.resolve(setTimeout(() => {
+//     console.log('xx');
+//   }, 1000))
+
+//   console.log('xxxx');
+// }
+
+// e()
+
+type ResolveFunc = (value: any) => void;
+type RejectFunc = (reason: any) => void;
+
+class MyPromise {
+  private state: 'pending' | 'fulfilled' | 'rejected' = 'pending';
+  private value: any = undefined;
+  private reason: any = undefined;
+  private onFulfilledCallbacks: ResolveFunc[] = [];
+  private onRejectedCallbacks: RejectFunc[] = [];
+
+  constructor(executor: (resolve: ResolveFunc, reject: RejectFunc) => void) {
+    const resolve = (value: any) => {
+      if (this.state === 'pending') {
+        this.state = 'fulfilled'
+        this.value = value
+      }
+    }
+
+    const reject = (reason: any) => {
+      if (this.state === 'pending') {
+        this.state = 'rejected'
+        this.reason = reason
+      }
+    }
+
+    try {
+      executor(resolve, reject)
+    }
+    catch (err) {
+      reject(err)
+    }
+  }
+
+  then(onFulfilled?: ResolveFunc, onRejected?: RejectFunc) {
+    return new MyPromise((resolve, reject) => {
+      if (this.state === 'fulfilled') {
+        try {
+          const x = onFulfilled?.(this.value);
+          resolve(x);
+        } catch (err) {
+          reject(err);
+        }
+      } else if (this.state === 'rejected') {
+        try {
+          const x = onFulfilled?.(this.reason)
+          reject(x)
+        }
+        catch (err) {
+          reject(err)
+        }
+      } else if (this.state === 'pending') {
+        this.onFulfilledCallbacks.push((value) => {
+          try {
+            const x = onFulfilled?.(value);
+            resolve(x);
+          } catch (err) {
+            reject(err);
+          }
+        });
+        this.onRejectedCallbacks.push((reason) => {
+          try {
+            const x = onRejected?.(reason);
+            reject(x);
+          } catch (err) {
+            reject(err);
+          }
+        });
+      }
+    })
+  }
+}
+
+const a = new MyPromise(resolve => resolve('xxxx'))
+
+a.then((res) => {
+  console.log(res);
+}, (err) => {
+  console.log(err);
+})
