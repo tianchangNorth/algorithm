@@ -1,14 +1,15 @@
 import { log } from "node:console";
+import { resolve } from "node:path";
 
-function a() {
-  new Promise(() => {
-    setTimeout(() => {
-      console.log('settime1');
-    }, 1000)
-  })
+// function a() {
+//   new Promise(() => {
+//     setTimeout(() => {
+//       console.log('settime1');
+//     }, 1000)
+//   })
 
-  console.log('notime1');
-}
+//   console.log('notime1');
+// }
 
 // a()
 
@@ -39,20 +40,54 @@ function a() {
 
 // test();
 
-async function test() {
-  await test1();
-  console.log(123)
+// async function test() {
+//   await test1();
+//   console.log(123)
+// }
+
+
+// function test1() {
+//   return new Promise<void>(resolve => {
+//     //请求api
+//     setTimeout(() => {
+//       console.log("resolve");
+//       resolve()
+//     }, 3000)
+//   });
+// }
+
+// test();
+
+const a = new Promise(resolve => setTimeout(() => { console.log('kaishi'); resolve('xxx') }, 1000))
+
+// a.then((res) => {
+//   console.log(res);
+// })
+
+async function b() {
+  const value = await a
+  console.log('jeishub');
 }
 
-
-function test1() {
-  return new Promise<void>(resolve => {
-    //请求api
-    setTimeout(() => {
-      console.log("resolve");
-      resolve()
-    }, 3000)
-  });
+function c() {
+  a.then(() => {
+    console.log('jieshuc');
+  })
 }
 
-test();
+b()
+
+c()
+
+// type ResolveFunc = (value: any) => void;
+// type RejectFunc = (reason: any) => void;
+
+// class Promise {
+//   private state: 'pending' | 'fulfilled' | 'rejected' = 'pending';
+//   private value: any = undefined;
+//   private reason: any = undefined;
+//   private onFulfilledCallbacks: ResolveFunc[] = [];
+//   private onRejectedCallbacks: RejectFunc[] = [];
+
+//   constructor(executor: (resolve: ResolveFunc, reject: RejectFunc) => void) { }
+// }
