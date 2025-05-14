@@ -105,6 +105,7 @@ class MyPromise {
       if (this.state === 'pending') {
         this.state = 'fulfilled'
         this.value = value
+        this.onFulfilledCallbacks.forEach(fn => fn(value));
       }
     }
 
@@ -112,6 +113,7 @@ class MyPromise {
       if (this.state === 'pending') {
         this.state = 'rejected'
         this.reason = reason
+        this.onRejectedCallbacks.forEach(fn => fn(reason));
       }
     }
 
@@ -162,10 +164,12 @@ class MyPromise {
   }
 }
 
-const a = new MyPromise(resolve => resolve('xxxx'))
+const a = new MyPromise(resolve => setTimeout(() => { resolve('xxx') }, 1000))
 
 a.then((res) => {
   console.log(res);
-}, (err) => {
-  console.log(err);
+})
+
+a.then(res => {
+  console.log('2' + res);
 })
