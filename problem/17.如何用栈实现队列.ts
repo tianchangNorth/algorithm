@@ -18,7 +18,7 @@
 
 class MyQueue {
   private fstack: any[] = []
-  constructor(public stack: any[] = []) { }
+  constructor(private stack: any[] = []) { }
 
   push(value: any) {
     this.stack.push(value)
