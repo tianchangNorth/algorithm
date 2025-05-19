@@ -36,3 +36,15 @@ const subsets = (nums: any[]): [] => {
 }
 
 console.log(subsets([1, 2, 3]));
+
+const recursive = (a: number) => {
+  console.log(a);
+  a += 1
+  if (a > 2) return;
+  recursive(a)
+  console.log('go');
+}
+
+
+console.log(recursive(1));
+
