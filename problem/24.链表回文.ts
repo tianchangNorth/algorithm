@@ -60,5 +60,4 @@ const palindromic = (head: ListNode | null): boolean => {
 };
 
 
-
 console.log(palindromic(list24!));

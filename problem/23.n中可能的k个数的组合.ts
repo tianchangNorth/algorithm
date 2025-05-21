@@ -21,7 +21,7 @@ const combine = (n: number, k: number): [] => {
     for (let i = index; i <= n; i++) {
       curr.push(i)
       dfs(i + 1)
-      // curr.pop(i)
+      curr.pop(i)
     }
   }
   dfs(1)
