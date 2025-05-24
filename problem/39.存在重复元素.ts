@@ -17,5 +17,12 @@
 // 输出：true
 
 function containsDuplicate(nums: number[]): boolean {
-  return true
+  const map: Record<number, number> = {}
+  for (const num of nums) {
+    if (map[num]) {
+      return true
+    }
+    map[num] = 1
+  }
+  return false
 };
