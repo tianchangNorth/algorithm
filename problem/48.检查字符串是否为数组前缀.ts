@@ -13,3 +13,13 @@
 // 输出：false
 // 解释：
 // 数组的前缀相连无法得到 s 。
+
+function isPrefixString(s: string, words: string[]): boolean {
+  for (let i = 0, j = ''; i < words.length; i++) {
+    j += words[i]; // 计算当前前缀字符串的长度
+    if (j === s) {
+      return true; // 如果前缀字符串等于 s，则返回 true
+    }
+  }
+  return false
+};
