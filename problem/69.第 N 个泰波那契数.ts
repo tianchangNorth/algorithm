@@ -10,6 +10,11 @@
 // T_4 = 1 + 1 + 2 = 4
 
 function tribonacci(n: number): number {
-
-  return 1
+  const f = [0, 1, 1]
+  for (let i = 0; i <= n - 3; i++) {
+    f[i + 3] = f[i] + f[i + 1] + f[i + 2]
+  }
+  return f[n]
 };
+
+console.log(tribonacci(4));
