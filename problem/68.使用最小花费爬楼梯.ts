@@ -9,7 +9,7 @@
 // - 支付 15 ，向上爬两个台阶，到达楼梯顶部。
 // 总花费为 15
 
-function minCostClimbingStairs(cost: number[]): number {
+function minCostClimbingStair(cost: number[]): number {
   const F: number[] = new Array(cost.length + 1).fill(0)
   for (let i = 2; i <= cost.length; i++) {
     F[i] = Math.min(F[i - 1] + cost[i - 1], F[i - 2] + cost[i - 2])
@@ -17,4 +17,4 @@ function minCostClimbingStairs(cost: number[]): number {
   return F[cost.length]
 };
 
-console.log(minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]));
+console.log(minCostClimbingStair([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]));
