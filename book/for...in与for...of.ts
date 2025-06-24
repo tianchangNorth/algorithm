@@ -31,3 +31,18 @@ for (const [key, value] of Object.entries(obj)) {
   console.log(key, value);
 }
 
+
+// class Person {
+//   name = 'zhangsan';
+//   age = 18;
+
+//   say() {
+//     console.log(this.name);
+//   }
+// }
+
+// const p = new Person();
+// for (const key in p) {
+//   console.log(key); // name age
+// }
+
