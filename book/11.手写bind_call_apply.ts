@@ -45,3 +45,19 @@ Function.prototype.myBind = function (context: any, ...boundArgs: any[]) {
 // 示例
 const boundFn = sayHello.myBind(user, 'Hey')
 boundFn() // Hey, Alice
+
+function Animal(this: any, name: string, sound: string) {
+  this.name = name
+  this.sound = sound
+}
+
+const dog = new (Animal as any)('xiao', 'gou')
+console.log(dog.name)   // xiao
+console.log(dog.sound)  // gou
+
+console.log(dog.__proto__ === Animal.prototype);
+
+console.log(dog instanceof Animal);
+
+
+
