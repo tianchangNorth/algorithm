@@ -1,7 +1,5 @@
 function parallel(urls: string[], max: number, callback: Function) {
   const results = new Array(urls.length); // 保存结果，按顺序填充
-  console.log(results);
-
   let current = 0
   let completed = 0
 
@@ -45,7 +43,6 @@ function parallel(urls: string[], max: number, callback: Function) {
 //   for (let i = 0; i < Math.min(max, urls.length); i++) {
 //     schedule()
 //   }
-
 //   Promise.allSettled(results).then(() => callback(results))
 // }
 
