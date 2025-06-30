@@ -90,6 +90,7 @@ import { resolve } from "node:path";
 
 // e()
 
+
 type ResolveFunc = (value: any) => void;
 type RejectFunc = (reason: any) => void;
 
@@ -168,8 +169,6 @@ const a = new MyPromise(resolve => setTimeout(() => { resolve('xxx') }, 1000))
 
 a.then((res) => {
   console.log(res);
-})
-
-a.then(res => {
-  console.log('2' + res);
+}).then(res => {
+  console.log('1' + res);
 })
