@@ -19,6 +19,15 @@ for (let i = 0; i < 1000; i++) {
   current = newObj;
 }
 
+class Person {
+  private name = 'xxxx'
+}
+
+const xiaoming = new Person()
+
+console.log(Object.getPrototypeOf(xiaoming) === Person.prototype); // true
+
+
 // 查找不存在的属性
 console.time('原型链查找');
 current.someProperty; // 遍历整个原型链
