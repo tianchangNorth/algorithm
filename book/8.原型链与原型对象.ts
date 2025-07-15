@@ -32,3 +32,4 @@ console.log(Object.getPrototypeOf(xiaoming) === Person.prototype); // true
 console.time('原型链查找');
 current.someProperty; // 遍历整个原型链
 console.timeEnd('原型链查找'); // 耗时明显增加
+
