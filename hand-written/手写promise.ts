@@ -71,3 +71,5 @@ class MyPromise {
     })
   }
 }
+
+const time = new MyPromise((resolve, reject) => { setTimeout(() => { resolve('time'), 1000 }) })
