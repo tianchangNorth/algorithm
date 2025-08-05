@@ -70,6 +70,7 @@ console.log(changeSort([5, 4, 3, 2, 1]));
 
 // 归并排序
 // 归并排序是一种不原地但稳定的排序算法
+// 时间复杂度 nlogn
 const mergeSort = (nums: number[]): number[] => {
   if (nums.length <= 1) return nums
 
@@ -97,7 +98,8 @@ const merge = (left: number[], right: number[]): number[] => {
 }
 
 // 快速排序
-// 快排是一种原地、不稳定的排序算法
+// 快排是一种原地、不稳定的排序算法 
+// 时间复杂度 nlogn
 const quickSort = (nums: number[]): number[] => {
   if (nums.length <= 1) return nums
   const key = nums[0]
