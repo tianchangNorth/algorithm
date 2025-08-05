@@ -109,3 +109,42 @@ const quickSort = (nums: number[]): number[] => {
 }
 
 console.log('quick', quickSort([5, 4, 3, 2, 1]));
+
+// 计数排序
+// 计数排序只能用在数据范围不大的场景中，如果数据范围 k 比要排序的数据 n 大很多，就不适合用计数排序了。而且，计数排序只能给非负整数排序，如果要排序的数据是其他类型的，要将其在不改变相对大小的情况下，转化为非负整数。
+const countingSort = (nums: number[]): number[] => {
+  if (nums.length <= 1) return nums
+
+  let max = nums[0]
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] > max) max = nums[i]
+  }
+
+  let count = new Array(max + 1).fill(0)
+
+  for (let i = 0; i < nums.length; i++) {
+    count[nums[i]]++
+  }
+
+  for (let i = 1; i < count.length; i++) {
+    count[i] = count[i - 1] + count[i]
+  }
+
+  let result = new Array(nums.length)
+
+  for (let i = nums.length - 1; i >= 0; i--) {
+    let index = count[nums[i]] - 1
+    result[index] = nums[i]
+    count[nums[i]]--
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    nums[i] = result[i]
+  }
+
+  return nums
+}
+
+console.log('counting', countingSort([5, 4, 4, 3, 3, 3, 2, 2, 1]));
+
+
