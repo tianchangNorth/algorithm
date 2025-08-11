@@ -37,3 +37,62 @@ const bsearchInternally = (nums: number[], r: number, l: number, num: number): b
 }
 
 console.log(bsearch1([1, 2, 3, 4, 5], 5));
+
+
+function sqrtBinarySearch(x) {
+  if (x < 0) throw new Error("负数没有实数平方根");
+  if (x === 0 || x === 1) return x.toFixed(6);
+
+  let left = 0;
+  let right = x < 1 ? 1 : x;
+  let mid;
+
+  const eps = 1e-7; // 精度阈值
+
+  while (right - left > eps) {
+    mid = (left + right) / 2;
+    if (mid * mid > x) {
+      right = mid;
+    } else {
+      left = mid;
+    }
+  }
+
+  return ((left + right) / 2).toFixed(6);
+}
+
+//二分查找变形1  查找符合要求的第一个数字
+
+const bsearch2 = (nums: number[], num: number): number => {
+  let l = 0
+  let r = nums.length - 1
+  while (l <= r) {
+    const mid = (l + r) >> 1
+    if (nums[mid] > num) {
+      r = mid - 1
+    } else if (nums[mid] < num) {
+      l = mid + 1
+    } else {
+      if (mid === 0 || nums[mid - 1] !== num) return mid
+      r = mid - 1
+    }
+  }
+  return -1
+}
+
+// 查找第一个大于等于给定值的元素
+
+const bsearch3 = (nums: number[], num: number): number => {
+  let l = 0
+  let r = nums.length - 1
+  while (l <= r) {
+    const mid = (l + r) >> 1
+    if (nums[mid] >= num) {
+      if (mid === 0 || nums[mid - 1] < num) return mid
+      r = mid - 1
+    } else {
+      l = mid + 1
+    }
+  }
+  return -1
+}
