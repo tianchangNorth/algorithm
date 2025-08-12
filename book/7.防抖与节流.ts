@@ -1,3 +1,5 @@
+import { time } from "console"
+
 function debounce(fn: Function) {
   let timer: any = null
   return function (this: any, ...args: any[]) {
@@ -30,4 +32,30 @@ const obj121 = {
 }
 
 obj121.log('world') // Hello, world
+setTimeout(() => {
+  obj121.log('world') // Hello, world
+}, 500)
 
+function debonce1(fn: Function) {
+  let timer: any = null;
+
+  return function (this: any, ...args: []) {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+    }, 1000)
+  }
+}
+
+function throttle1(fn: Function) {
+  let canRun = true;
+  return function (this: any, ...args: any[]) {
+    if (!canRun) return
+    canRun = false
+
+    setTimeout(() => {
+      fn.apply(this, args)
+      canRun = true
+    }, 1000)
+  }
+}
