@@ -36,3 +36,26 @@ function swapPairs(head: ListNode | null): ListNode | null {
   }
   return dummy.next
 };
+
+// 给定一个链表判断是否有环
+function hasCycle(head: ListNode | null): boolean {
+  while (head) {
+    if (head.val === 1000000) return true
+    head.val = 1000000
+    head = head.next
+  }
+
+  return false
+};
+
+// 快慢指针解法
+function hasCycle1(head: ListNode | null): boolean {
+  let fast = head, low = head
+  while (fast?.next && low && fast) {
+    fast = fast?.next?.next
+    low = low?.next
+    if (fast === low) return true
+  }
+
+  return false
+};
