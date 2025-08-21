@@ -50,29 +50,70 @@ class MyQueue {
 
 // 数据流中的第 K 大元素
 class KthLargest {
-  private minheap: number[] = []
+  private heap: number[] = []
+
   constructor(public k: number, public nums: number[]) {
-    this.minheap = nums.sort((a, b) => a - b).slice(-k)
+    for (const item of nums) {
+      this.add(item)
+    }
   }
 
-  quickSort(nums: number[]): number[] {
-    if (nums.length <= 1) return nums
-    const key = nums[0]
-    const left = nums.filter(item => item < key)
-    const mid = nums.filter(item => item === key)
-    const right = nums.filter(item => item > key)
-    return [...this.quickSort(left), ...mid, ...this.quickSort(right)]
-  }
   add(val: number): number {
-    this.minheap.push(val)
-    this.minheap = this.quickSort(this.minheap).slice(-this.k) // ✅ 裁剪
-    return this.minheap[0]
+    if (this.heap.length < this.k) {
+      this.heap.push(val)
+      this.heapifyUp(this.heap.length - 1)
+    } else if (val > this.heap[0]) {
+      this.pop()
+      this.heap.push(val)
+      this.heapifyUp(this.heap.length - 1)
+    }
+    return this.heap[0]
+  }
+
+  /** 弹出堆顶（最小值） */
+  private pop(): number {
+    const min = this.heap[0]
+    const last = this.heap.pop()
+    if (this.heap.length > 0 && last !== undefined) {
+      this.heap[0] = last
+      this.heapifyDown(0)
+    }
+    return min
+  }
+
+  /** 向上调整 */
+  private heapifyUp(index: number): void {
+    let parent = (index - 1) >> 1
+    while (index > 0 && this.heap[index] < this.heap[parent]) {
+      [this.heap[index], this.heap[parent]] = [this.heap[parent], this.heap[index]]
+      index = parent
+      parent = (index - 1) >> 1
+    }
+  }
+
+  /** 向下调整 */
+  private heapifyDown(index: number): void {
+    const n = this.heap.length
+    while (true) {
+      let smallest = index
+      const left = index * 2 + 1
+      const right = index * 2 + 2
+
+      if (left < n && this.heap[left] < this.heap[smallest]) smallest = left
+      if (right < n && this.heap[right] < this.heap[smallest]) smallest = right
+
+      if (smallest === index) break
+      [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]]
+      index = smallest
+    }
   }
 }
 
 const list = new KthLargest(3, [4, 5, 8, 2])
 
 console.log(list.add(3));
+
+console.log(list.add(6));
 
 // console.log(list.add(1));
 
