@@ -20,7 +20,7 @@
 function maxSlidingWindow(nums: number[], k: number): number[] {
   const stack: number[] = [], res: number[] = []
   for (let i = 0; i < nums.length; i++) {
-    if (stack[0] < i - k) {
+    if (stack.length && stack[0] <= i - k) {
       stack.shift()
     }
 
