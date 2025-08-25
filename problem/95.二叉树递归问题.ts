@@ -1,3 +1,9 @@
+// 定义函数的语义（它要干什么）
+
+// 写终止条件（递归的出口）
+
+// 假设子问题已经解决，利用结果写出当前层逻辑
+
 // 二叉树最大深度
 function maxDepth(root: TreeNode | null): number {
   if (!root) return 0
@@ -59,3 +65,15 @@ function binaryTreePaths(root: TreeNode | null): string[] {
   return ans
 };
 
+// 二叉搜索树验证
+function isValidBST1(root: TreeNode | null): boolean {
+  return helper(root, null, null)
+}
+
+function helper(root: TreeNode | null, max: number | null, min: number | null): boolean {
+  if (!root) return true
+  if (max !== null && root.val > max) return false
+  if (min !== null && root.val < min) return false
+
+  return helper(root.left, root.val, min) && helper(root.right, max, root.val)
+}
