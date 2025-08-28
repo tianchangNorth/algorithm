@@ -62,3 +62,37 @@ function xPowN(x: number, n: number): number {
 
 console.log(xPowN(2, 3));
 
+// 求众数
+// [1,2,3,3,3]
+
+function majorityElement(nums: number[]): number {
+  function majority(lo: number, hi: number): number {
+    // base case: 只有一个元素时，它就是众数
+    if (lo === hi) return nums[lo]
+
+    const mid = Math.floor((lo + hi) / 2)
+
+    const leftMajor = majority(lo, mid)
+    const rightMajor = majority(mid + 1, hi)
+
+    // 如果两边结果相同，直接返回
+    if (leftMajor === rightMajor) return leftMajor
+
+    // 否则统计两个候选数在当前区间的出现次数
+    const leftCount = countInRange(leftMajor, lo, hi)
+    const rightCount = countInRange(rightMajor, lo, hi)
+
+    return leftCount > rightCount ? leftMajor : rightMajor
+  }
+
+  function countInRange(num: number, lo: number, hi: number): number {
+    let count = 0
+    for (let i = lo; i <= hi; i++) {
+      if (nums[i] === num) count++
+    }
+    return count
+  }
+
+  return majority(0, nums.length - 1)
+}
+
