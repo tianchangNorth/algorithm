@@ -14,7 +14,7 @@ const bubbleSort = (nums: number[]): number[] => {
         flag = true
       }
     }
-    if (false === false) break
+    if (flag === false) break
   }
   return nums
 }
