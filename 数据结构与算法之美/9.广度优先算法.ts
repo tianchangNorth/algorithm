@@ -26,3 +26,20 @@ function BFS(root: TreeNode | null): number[] {
 
   return result;
 }
+
+function Bfs(root: TreeNode | null) {
+  if (!root) return null
+  const queue: TreeNode[] = [root]
+  const result: number[] = []
+
+  while (queue) {
+    const cur = queue.shift()!
+
+    result.push(cur?.val)
+
+    if (cur.left) queue.push(cur.left)
+    if (cur.right) queue.push(cur.right)
+  }
+
+  return result
+}
