@@ -1,4 +1,4 @@
-class EveentEmitter {
+class EventEmitter {
   constructor(private event: Record<string, any> = {}) {
 
   }
