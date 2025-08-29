@@ -48,7 +48,7 @@ function levelOrder(root: TreeNode | null): number[][] {
       if (cur?.right) queue.push(cur.right)
     }
 
-    answer.push(list)
+    answer.unshift(list)
   }
   return answer
 };
