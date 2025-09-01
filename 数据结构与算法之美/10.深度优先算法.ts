@@ -18,6 +18,8 @@ export class GraphNode {
   }
 }
 
+// 递归写法
+// 不带visited
 function DFS(root: TreeNode) {
   if (!root) return
 
@@ -27,6 +29,7 @@ function DFS(root: TreeNode) {
   }
 }
 
+// 带visited
 function dfsRecursive(node: GraphNode, visited: Set<GraphNode> = new Set()): void {
   if (visited.has(node)) return // 避免死循环
   visited.add(node)
@@ -36,4 +39,21 @@ function dfsRecursive(node: GraphNode, visited: Set<GraphNode> = new Set()): voi
   for (const neighbor of node.neighbors) {
     dfsRecursive(neighbor, visited)
   }
+}
+
+
+// 迭代写法
+function dfsIterative(root: TreeNode | null): Array<number> {
+  if (!root) return []
+  const stack: any[] = []
+  const result: number[] = []
+  while (stack.length) {
+    const node = stack.pop()
+    result.push(node.val)
+    for (let i = root.children.length - 1; i >= 0; i--) {
+      stack.push(root.children[i])
+    }
+  }
+
+  return result
 }
