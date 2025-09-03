@@ -23,7 +23,7 @@ function solveSudoku(board: string[][]): string[][] {
     for (let j = 0; j < 9; j++) {
       const ch = board[i][j];
       if (ch !== ".") {
-        const num = ch.charCodeAt(0) - "1".charCodeAt(0); // 0~8
+        const num = Number(ch) - 1; // 0~8
         row[i][num] = true;
         col[j][num] = true;
         const k = Math.floor(i / 3) * 3 + Math.floor(j / 3); // 3x3 小宫格索引
@@ -41,7 +41,7 @@ function solveSudoku(board: string[][]): string[][] {
     for (let num = 0; num < 9; num++) {
       if (!row[i][num] && !col[j][num] && !box[k][num]) {
         // 试填
-        board[i][j] = String.fromCharCode(num + "1".charCodeAt(0));
+        board[i][j] = (num + 1).toString();
         row[i][num] = col[j][num] = box[k][num] = true;
 
         if (dfs(i, j + 1)) return true; // 成功继续
