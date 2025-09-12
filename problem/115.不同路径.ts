@@ -72,7 +72,7 @@ function uniquePathsWithObstacles(obstacleGrid: number[][]): number {
 };
 
 // 爬楼梯问题
-function ClimbStars(n: number): number {
+function ClimbStairs(n: number): number {
   const f: number[] = [0, 1, 2]
 
   for (let i = 3; i <= n; i++) {
@@ -82,7 +82,7 @@ function ClimbStars(n: number): number {
   return f[n]
 }
 
-console.log(ClimbStars(4));
+console.log(ClimbStairs(4));
 
 
 
