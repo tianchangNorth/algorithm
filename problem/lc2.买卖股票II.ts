@@ -11,7 +11,7 @@
 // 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6 - 3 = 3。
 // 最大总利润为 4 + 3 = 7 。
 
-function maxProfit(prices: number[]): number {
+function maxProfitii(prices: number[]): number {
   let sum = 0
   for (let i = 1; i < prices.length; i++) {
     if (prices[i] > prices[i - 1]) {

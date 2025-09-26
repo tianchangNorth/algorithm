@@ -2,7 +2,7 @@
 // 你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
 // 返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
 
-function maxProfit(prices: number[]): number {
+function maxProfitdp(prices: number[]): number {
   if (prices === null || prices.length === 0) return 0
   const dp: number[][] = Array.from({ length: prices.length }, () => Array(2).fill(0))
   dp[0][0] = 0
@@ -16,7 +16,7 @@ function maxProfit(prices: number[]): number {
   return dp[prices.length - 1][0]
 };
 
-function maxProfit(prices: number[]): number {
+function maxProfitdp2(prices: number[]): number {
   if (prices === null || prices.length === 0) return 0
   let hold = -prices[0], noHold = 0
 
